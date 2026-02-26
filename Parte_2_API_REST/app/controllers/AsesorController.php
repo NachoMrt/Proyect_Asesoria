@@ -1,12 +1,12 @@
 <?php
 
-require_once 'models/cliente.php';
+require_once 'models/asesor.php';
 
-class ClienteController {
+class AsesorController {
     public function index() {
-        $u = new Cliente();
+        $u = new Asesor();
         $clientes = $u->getAll();
-        require 'views/clientes.php';
+        require 'views/asesores.php';
     }
     public function crear() {
         /*  La PRIMERA VEZ :
@@ -16,23 +16,23 @@ class ClienteController {
                     Guarda en BD y Redirige al listado
         */
         if($_POST){
-            (new Cliente())->save($_POST['nombre'],$_POST['dnie'],$_POST['email'],$_POST['telefono']);
+            (new Asesor())->save($_POST['nombre'],$_POST['especialidad'],$_POST['email']);
             header("Location: index.php");
         }
-        require 'views/crear_cliente.php';
+        require 'views/crear_asesor.php';
     }
     public function editar() {
         // En DOS pasos como método anterior de crear()
-        $u = new Cliente();
+        $u = new Asesor();
         if($_POST){
-            $u->update($_POST['nombre'],$_POST['dnie'],$_POST['email'],$_POST['telefono'],$_POST['id_cliente']);
+            $u->update($_POST['nombre'],$_POST['especialidad'],$_POST['email'],$_POST['id_asesor']);
             header("Location: index.php");
         }
-        $data = $u->getById($_GET['id_cliente']);
-        require 'views/editar_cliente.php';
+        $data = $u->getById($_GET['id_asesor']);
+        require 'views/editar_asesor.php';
     }
     public function eliminar() {
-        (new Cliente())->delete($_GET['id_cliente']);
+        (new Asesor())->delete($_GET['id_asesor']);
         header("Location: index.php");
     }
 
