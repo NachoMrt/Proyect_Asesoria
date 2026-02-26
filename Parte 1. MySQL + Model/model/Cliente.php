@@ -21,7 +21,7 @@ class Cliente
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
-    public function save($nombre, $email, $dnie, $telefono)
+    public function save($nombre, $dnie, $email, $telefono)
     {
         $stmt = $this->db->prepare("INSERT INTO clientes VALUES(NULL,?,?,?,?)");
         $stmt->execute([$nombre, $dnie, $email, $telefono]);
@@ -29,7 +29,7 @@ class Cliente
     public function update($id, $nombre, $email, $dnie, $telefono)
     {
         $stmt = $this->db->prepare("UPDATE clientes SET nombre=?,email=?, dnie=?, telefono=? WHERE id_cliente=?");
-        $stmt->execute([$nombre, $dnie, $email, $telefono, $id]);
+        $stmt->execute([$nombre, $email, $dnie, $telefono, $id]);
     }
     public function delete($id)
     {
