@@ -25,7 +25,7 @@ class Router
     {
         $parts = explode('/', trim($uri, '/'));
 
-        if ($parts[0] != 'factura' && $parts[0] != 'asesor' && $parts[0] != 'cliente' && $parts[0] != 'servicio') {
+        if ($parts[0] != 'facturas' && $parts[0] != 'asesores' && $parts[0] != 'clientes' && $parts[0] != 'servicios') {
             http_response_code(404);
             echo json_encode(['mensaje' => 'Ruta no encontrada']);
             return;
