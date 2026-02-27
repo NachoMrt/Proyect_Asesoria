@@ -44,7 +44,7 @@ fetch('http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/ind
 document.getElementById("formulario").addEventListener("submit", function(e){
   e.preventDefault();
 
-  fetch('public/index.php/asesores', {
+  fetch('http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/asesores', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ document.getElementById("formUpdate").addEventListener("submit", function(e){
 
   const id_asesor = this.id_asesor.value;
 
-  fetch(`/Certificado/API_REST/REST/public/index.php/asesores/${id_asesor}`, {
+  fetch(`http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/asesores/${id_asesor}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -104,7 +104,7 @@ function eliminarAsesor() {
 
   const id_asesor = document.getElementById("idEliminar").value;
 
-  fetch(`/Certificado/API_REST/REST/public/index.php/asesores/${id_asesor}`, {
+  fetch(`http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/asesores/${id_asesor}`, {
     method: 'DELETE'
   })
   .then(response => response.json())
@@ -142,7 +142,7 @@ fetch('http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/ind
 document.getElementById("formulario").addEventListener("submit", function(e){
   e.preventDefault();
 
-  fetch('public/index.php/clientes', {
+  fetch('http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/clientes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -174,7 +174,7 @@ document.getElementById("formUpdate").addEventListener("submit", function(e){
 
   const id_cliente = this.id_cliente.value;
 
-  fetch(`/Certificado/API_REST/REST/public/index.php/asesores/${id_cliente}`, {
+  fetch(`http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/clientes/${id_cliente}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -205,7 +205,7 @@ function eliminarCliente() {
 
   const id_cliente = document.getElementById("idEliminar").value;
 
-  fetch(`/Certificado/API_REST/REST/public/index.php/cliente/${id_cliente}`, {
+  fetch(`http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/clientes/${id_cliente}`, {
     method: 'DELETE'
   })
   .then(response => response.json())
