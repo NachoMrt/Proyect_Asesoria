@@ -1,42 +1,57 @@
 <?php
 
-require_once __DIR__ . "/../models/Factura.php";
 
-class AsesorController {
-    public function index() {
-        $u = new Asesor();
-        $clientes = $u->getAll();
-        require 'views/asesores.php';
+require_once __DIR__ . "/../models/asesor.php";
+
+class AsesorController
+{
+    public function index()
+    {
+        echo json_encode(Asesor::all());
     }
-    public function crear() {
-        /*  La PRIMERA VEZ :
-                NO hay POST -> $_POST está vacío -> El if($_POST) NO entra -> Ejecuta el require
-            La SEGUNDA VEZ:
-                Ahora SÍ hay POST -> $_POST contiene nombre y email -> El if($_POST) SÍ entra ;
-                    Guarda en BD y Redirige al listado
-        */
-        if($_POST){
-            (new Asesor())->save($_POST['nombre'],$_POST['especialidad'],$_POST['email']);
-            header("Location: index.php");
+
+    public function show($id_asesor)
+    {
+        $asesor = Asesor::find($id_asesor);
+        if (!$asesor) {
+            http_response_code(404);
+            echo json_encode(['mensaje' => 'Asesor no encontrada']);
+        } else {
+            echo json_encode($asesor);
         }
-        require 'views/crear_asesor.php';
     }
-    public function editar() {
-        // En DOS pasos como método anterior de crear()
-        $u = new Asesor();
-        if($_POST){
-            $u->update($_POST['nombre'],$_POST['especialidad'],$_POST['email'],$_POST['id_asesor']);
-            header("Location: index.php");
+
+    public function store($data)
+    {
+        if (!isset($data['id_asesor']) || !isset($data['nombre']) || !isset($data['especialidad']) || !isset($data['email']) ) {
+            http_response_code(400);
+            echo json_encode(['mensaje' => 'Datos incompletos']);
+            return;
         }
-        $data = $u->getById($_GET['id_asesor']);
-        require 'views/editar_asesor.php';
+        $asesor = Asesor::create($data);
+        http_response_code(201);
+        echo json_encode($asesor);
     }
-    public function eliminar() {
-        (new Asesor())->delete($_GET['id_asesor']);
-        header("Location: index.php");
+
+    public function update($id_asesor, $data)
+    {
+        $asesor = Asesor::update($id_asesor, $data);
+        if (!$asesor) {
+            http_response_code(404);
+            echo json_encode(['mensaje' => 'Asesor no encontrada']);
+        } else {
+            echo json_encode($asesor);
+        }
+    }
+
+    public function delete($id)
+    {
+        $result = Asesor::delete($id);
+        if ($result) {
+            echo json_encode(['mensaje' => 'Asesor eliminado']);
+        } else {
+            http_response_code(404);
+            echo json_encode(['mensaje' => 'Asesor no encontrado']);
+        }
     }
 }
-
-
-
-

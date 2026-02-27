@@ -19,10 +19,7 @@ class Cliente {
         $stmt = $this->db->prepare("INSERT INTO clientes VALUES(NULL,?,?,?,?)");
         $stmt->execute([$nombre,$dnie,$email,$telefono]);
     }
-    // public function update($id,$nombre,$email,$clave,$edad) {
-    //     $stmt = $this->db->prepare("UPDATE clientes SET nombre=?,email=?,clave=?,edad=? WHERE id=?");
-    //     $stmt->execute([$nombre,$email,$clave,$edad,$id]);
-    // }
+    
     public function update($nombre,$dnie,$email,$telefono, $id_cliente) {
     $stmt = $this->db->prepare(
         "UPDATE clientes SET nombre=?, dnie=?, email=?, telefono=? WHERE id_cliente=?"

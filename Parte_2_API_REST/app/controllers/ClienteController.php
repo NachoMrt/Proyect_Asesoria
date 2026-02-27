@@ -1,43 +1,56 @@
 <?php
 
-require_once __DIR__ . "/../models/Factura.php";
+require_once __DIR__ . "/../models/cliente.php";
 
-class ClienteController {
-    public function index() {
-        $u = new Cliente();
-        $clientes = $u->getAll();
-        require 'views/clientes.php';
-    }
-    public function crear() {
-        /*  La PRIMERA VEZ :
-                NO hay POST -> $_POST está vacío -> El if($_POST) NO entra -> Ejecuta el require
-            La SEGUNDA VEZ:
-                Ahora SÍ hay POST -> $_POST contiene nombre y email -> El if($_POST) SÍ entra ;
-                    Guarda en BD y Redirige al listado
-        */
-        if($_POST){
-            (new Cliente())->save($_POST['nombre'],$_POST['dnie'],$_POST['email'],$_POST['telefono']);
-            header("Location: index.php");
-        }
-        require 'views/crear_cliente.php';
-    }
-    public function editar() {
-        // En DOS pasos como método anterior de crear()
-        $u = new Cliente();
-        if($_POST){
-            $u->update($_POST['nombre'],$_POST['dnie'],$_POST['email'],$_POST['telefono'],$_POST['id_cliente']);
-            header("Location: index.php");
-        }
-        $data = $u->getById($_GET['id_cliente']);
-        require 'views/editar_cliente.php';
-    }
-    public function eliminar() {
-        (new Cliente())->delete($_GET['id_cliente']);
-        header("Location: index.php");
+class ClienteController
+{
+    public function index()
+    {
+        echo json_encode(Cliente::all());
     }
 
+    public function show($id_cliente)
+    {
+        $cliente = Cliente::find($id_cliente);
+        if (!$cliente) {
+            http_response_code(404);
+            echo json_encode(['mensaje' => 'Cliente no encontrada']);
+        } else {
+            echo json_encode($cliente);
+        }
+    }
+
+    public function store($data)
+    {
+        if (!isset($data['id_cliente']) || !isset($data['nombre']) || !isset($data['dnie']) || !isset($data['email']) || !isset($data['edad']) ) {
+            http_response_code(400);
+            echo json_encode(['mensaje' => 'Datos incompletos']);
+            return;
+        }
+        $cliente = Cliente::create($data);
+        http_response_code(201);
+        echo json_encode($cliente);
+    }
+
+    public function update($id_cliente, $data)
+    {
+        $cliente = Cliente::update($id_cliente, $data);
+        if (!$cliente) {
+            http_response_code(404);
+            echo json_encode(['mensaje' => 'Cliente no encontrada']);
+        } else {
+            echo json_encode($cliente);
+        }
+    }
+
+    public function delete($id)
+    {
+        $result = Cliente::delete($id);
+        if ($result) {
+            echo json_encode(['mensaje' => 'Cliente eliminado']);
+        } else {
+            http_response_code(404);
+            echo json_encode(['mensaje' => 'Cliente no encontrado']);
+        }
+    }
 }
-
-
-
-

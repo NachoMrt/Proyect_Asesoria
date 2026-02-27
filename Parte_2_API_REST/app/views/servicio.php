@@ -6,16 +6,17 @@
     <title>Asesoria</title>
 </head>
 <body>
-    <h1>Lista de todos sercicios</h1>
+    <h1>Lista de todos servicios</h1>
     <table>
         <thead class="table-dark">
             <tr>
+                <th>ID</th>
                 <th>Nombre Servicio</th>
                 <th>Precio</th>
             </tr>
         </thead>
-        <tbody>
-            
+        <tbody class="tbody_container">
+            <script src="/../../public/assets/js/servicio.js"></script>
         </tbody>
     </table>
 </body>

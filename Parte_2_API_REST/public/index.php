@@ -15,9 +15,9 @@ $router->route($method, $uri, $data);
 
 
 /*
-    GET: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura
-    GET: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura/1 
-    POST: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura
+    GET: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/facturas
+    GET: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/facturas/1 
+    POST: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/facturas
         Headers:
             Content-Type: application/json
         Body ejemplo:
@@ -28,7 +28,7 @@ $router->route($method, $uri, $data);
                 "fecha": "2026-01-27",
                 "costo": "178",
             }
-    PUT: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura/1    
+    PUT: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/facturas/1    
         Lo mismo Headers y Body
-    DELETE: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura/1  
+    DELETE: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/facturas/1  
 */

@@ -33,7 +33,7 @@ class Router
 
         $id = $parts[1] ?? null;
 
-        if ($parts[0] === 'factura') {
+        if ($parts[0] === 'facturas') {
             switch ($method) {
                 case 'GET':
                     $id ? $this->controllerF->show($id) : $this->controllerF->index();
@@ -64,7 +64,7 @@ class Router
 
         }
 
-        if ($parts[0] === 'servicio') {
+        if ($parts[0] === 'servicios') {
             switch ($method) {
                 case 'GET':
                     $id ? $this->controllerS->show($id) : $this->controllerS->index();
@@ -94,7 +94,7 @@ class Router
             }
         }
 
-        if ($parts[0] === 'asesor') {
+        if ($parts[0] === 'asesores') {
             switch ($method) {
                 case 'GET':
                     $id ? $this->controllerA->show($id) : $this->controllerA->index();
@@ -124,7 +124,7 @@ class Router
             }
         }
 
-        if ($parts[0] === 'cliente') {
+        if ($parts[0] === 'clientes') {
             switch ($method) {
                 case 'GET':
                     $id ? $this->controllerC->show($id) : $this->controllerC->index();
