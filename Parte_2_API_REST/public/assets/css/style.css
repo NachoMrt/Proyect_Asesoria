@@ -1,0 +1,114 @@
+/* Paleta de colores y variables */
+:root {
+    --primary-color: #4361ee;
+    --success-color: #2ec4b6;
+    --warning-color: #ff9f1c;
+    --danger-color: #e71d36;
+    --dark-bg: #212529;
+    --light-bg: #f8f9fa;
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    background-color: var(--light-bg);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+/* Navegación estilo moderno */
+.nav-api {
+    background: var(--dark-bg);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-api a {
+    color: rgba(255,255,255,0.8);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-api a:hover {
+    color: var(--primary-color);
+}
+
+/* Cards Personalizadas */
+.card-api {
+    background: white;
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+    margin-bottom: 2.5rem;
+}
+
+.card-api:hover {
+    transform: translateY(-5px);
+}
+
+.card-api h2 {
+    font-weight: 700;
+    color: var(--dark-bg);
+    border-left: 5px solid var(--primary-color);
+    padding-left: 15px;
+}
+
+/* Tablas con mejor lectura */
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: #f1f3f5;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.table tbody td {
+    vertical-align: middle;
+    padding: 1rem 0.75rem;
+}
+
+/* Botones con micro-interacciones */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-primary { background-color: var(--primary-color); border: none; }
+.btn-warning { background-color: var(--warning-color); border: none; color: white; }
+.btn-danger { background-color: var(--danger-color); border: none; }
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Formularios más limpios */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    padding: 0.6rem 1rem;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+    border-color: var(--primary-color);
+}
+
+/* List-groups personalizados */
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #f1f3f5;
+    padding: 1rem 1.25rem;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}

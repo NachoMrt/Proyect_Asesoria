@@ -5,7 +5,7 @@ require_once __DIR__ . '/../app/config/Router.php';
 
 $method = $_SERVER['REQUEST_METHOD'];   
 $uri = $_SERVER['REQUEST_URI'];   
-$uri = preg_replace('#^/Certificado/Proyect_Asesoria/Parte_2_API_REST/public(/index\.php)?#', '', $uri);
+$uri = preg_replace('#^/Dinamica_grupos/Asesoria/Proyect_Asesoria/Parte_2_API_REST/public(/index\.php)?#', '', $uri);
 $uri = trim($uri, '/'); 
 
 $data = json_decode(file_get_contents('php://input'), true);

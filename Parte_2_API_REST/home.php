@@ -1,242 +1,75 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso a API-REST</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
 
-<!DOCTYPE html>
-<html>
-    <style>
-        nav ul {
-            display:flex;
-            flex-direction:row;
-            gap: 20px;
-        }
-    </style>
-<body>
-<nav>Acceso a API-REST</nav>
-<ul>
-    <li><a href="#asesores">Asesores</a></li>
-    <li><a href="#clientes">Clientes</a></li>
-     <li><a href="#facturas">Facturas</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-    <li></li>
-</ul>
+
+<nav class="nav-api sticky-top bg-dark p-3">
+    <div class="container d-flex justify-content-between text-white">
+        <span class="fw-bold">API-REST Home</span>
+        <ul class="d-flex gap-3 list-unstyled mb-0">
+            <li><a href="asesores" class="text-white">Asesores</a></li>
+            <li><a href="#clientes" class="text-white">Clientes</a></li>
+            <li><a href="#servicios" class="text-white">Servicios</a></li>
+            <li><a href="#facturas" class="text-white">Facturas</a></li>
+        </ul>
+    </div>
 </nav>
-<!-- GET -->
-<h1 id="asesores"> Lista de de asesores </h1>
-<ul id="lista"></ul>
-<script>
-fetch('http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/asesores')
-  .then(response => response.json())
-  .then(data => {
-    const lista = document.getElementById('lista');
-    data.forEach(asesor => {
-      lista.innerHTML += `<li>${asesor.nombre}</li>`;
+
+<div class="container mt-5">
+    <section id="servicios" class="mb-5">
+        <div class="card p-4 shadow-sm">
+            <h3><i class="bi bi-gear-fill"></i> Servicios</h3>
+            <table class="table">
+                <thead><tr><th>ID</th><th>Nombre</th><th>Precio</th><th>Opciones</th></tr></thead>
+                <tbody class="tbody_container"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="facturas" class="mb-5">
+        <div class="card p-4 shadow-sm border-primary">
+            <h2 class="text-primary mb-4"><i class="bi bi-file-earmark-spreadsheet"></i> Gestión de Facturas</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <h5>Historial de Facturación</h5>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead><tr><th>ID</th><th>Cliente</th><th>Total</th><th>Acciones</th></tr></thead>
+                            <tbody id="lista-facturas"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-light p-3 rounded">
+                        <h6>Nueva Factura</h6>
+                        <form id="form-factura">
+                            <input type="number" id="f-id_cliente" class="form-control mb-2" placeholder="ID Cliente" required>
+                            <input type="number" id="f-id_asesor" class="form-control mb-2" placeholder="ID Asesor" required>
+                            <input type="number" id="f-id_servicio" class="form-control mb-2" placeholder="ID Servicio" required>
+                            <input type="number" step="0.01" id="f-costo" class="form-control mb-2" placeholder="Costo (€)" required>
+                            <button type="submit" class="btn btn-success w-100">Emitir Factura</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="module">
+    import { cargarAsesores } from './assets/js/asesor.js';
+    import { cargarClientes } from './assets/js/cliente.js';
+    import { cargarServicios } from './assets/js/servicio.js';
+    import { cargarFacturas } from './assets/js/factura.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarAsesores();
+        cargarClientes();
+        cargarServicios();
+        cargarFacturas();
     });
-  });
 </script>
-
-
-<!-- POST -->
-<form id="formulario">
-  <input type="text" name="nombre" placeholder="Nombre">
-  <input type="text" name="especialidad" placeholder="especialidad">
-  <input type="text" name="email" placeholder="tu email">
-  <button type="submit"> Guardar </button>
-</form>
-<script>
-document.getElementById("formulario").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  fetch('http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/asesores', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      nombre: this.nombre.value,
-      especialidad: this.email.value,
-      email: this.password.value
-    })
-  });
-});
-</script>
-
-
-<!-- UPDATE -->
-<h2> Actualizar asesor </h2>
-<form id="formUpdate">
-    <input type="number" name="id_asesor" placeholder="ID asesor" required>
-    <input type="text" name="nombre" placeholder="Nuevo nombre" required>
-  <input type="text" name="especialidad" placeholder="tu especialidad" required>
-  <input type="text" name="email" placeholder="tu email">
-  <button type="submit"> Actualizar </button>
-</form>
-<script>
-document.getElementById("formUpdate").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  const id_asesor = this.id_asesor.value;
-
-  fetch(`http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/asesores/${id_asesor}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      nombre: this.nombre.value,
-      especialidad: this.especialidad.value,
-      email: this.email.value
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Asesor actualizado:", data);
-    alert("Asesor actualizado correctamente");
-  })
-  .catch(error => console.error("Error:", error));
-});
-</script>
-
-
-<!-- DELETE -->
-<h2> Eliminar asesor </h2>
-<input type="number" id="idEliminar" placeholder="ID asesor">
-<button onclick="eliminarAsesor()"> Eliminar </button>
-<script>
-function eliminarAsesor() {
-
-  const id_asesor = document.getElementById("idEliminar").value;
-
-  fetch(`http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/asesores/${id_asesor}`, {
-    method: 'DELETE'
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Usuario eliminado:", data);
-    alert("Usuario eliminado correctamente");
-  })
-  .catch(error => console.error("Error:", error));
-}
-</script>
-<!-- GET -->
-<h1 id="clientes"> Lista de de clientes </h1>
-<ul id="lista"></ul>
-<script>
-fetch('http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/clientes')
-  .then(response => response.json())
-  .then(data => {
-    const lista = document.getElementById('lista');
-    data.forEach(cliente => {
-      lista.innerHTML += `<li>${cliente.nombre}</li>`;
-    });
-  });
-</script>
-
-
-<!-- POST -->
-<form id="formulario">
-    <input type="number" name="id_cliente" placeholder="ID cliente" required>
-  <input type="text" name="nombre" placeholder="Nombre">
-  <input type="text" name="dnie" placeholder="dnie">
-  <input type="text" name="email" placeholder="tu email">
-   <input type="text" name="telefono" placeholder="telefono">
-  <button type="submit"> Guardar </button>
-</form>
-<script>
-document.getElementById("formulario").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  fetch('http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/clientes', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      nombre: this.nombre.value,
-      dnie: this.dnie.value,
-      email: this.email.value,
-      telefono: this.telefono.value
-    })
-  });
-});
-</script>
-
-
-<!-- UPDATE -->
-<h2> Actualizar cliente</h2>
-<form id="formUpdate">
-    <input type="number" name="id_cliente" placeholder="ID cliente" required>
-    <input type="text" name="nombre" placeholder="Nuevo nombre" required>
-  <input type="text" name="dnie" placeholder="tu dnie" required>
-  <input type="text" name="email" placeholder="tu email">
-  <input type="text" name="telefono" placeholder="tu telefono">
-  <button type="submit"> Actualizar </button>
-</form>
-<script>
-document.getElementById("formUpdate").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  const id_cliente = this.id_cliente.value;
-
-  fetch(`http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/clientes/${id_cliente}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      nombre: this.nombre.value,
-      dnie: this.dnie.value,
-      email: this.email.value,
-      telefono: this.telefono.value
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Cliente actualizado:", data);
-    alert("Cliente actualizado correctamente");
-  })
-  .catch(error => console.error("Error:", error));
-});
-</script>
-
-
-<!-- DELETE -->
-<h2> Eliminar cliente </h2>
-<input type="number" id="idEliminar" placeholder="ID cliente">
-<button onclick="eliminarCliente()"> Eliminar </button>
-<script>
-function eliminarCliente() {
-
-  const id_cliente = document.getElementById("idEliminar").value;
-
-  fetch(`http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/clientes/${id_cliente}`, {
-    method: 'DELETE'
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Cliente eliminado:", data);
-    alert("Cliente eliminado correctamente");
-  })
-  .catch(error => console.error("Error:", error));
-}
-</script>
-
-<!-- Servicios -->
-  <section>
-    <hr>
-    <h1>Lista de todos servicios</h1>
-    <table>
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Nombre Servicio</th>
-          <th>Precio</th>
-          <th>Opciones</th>
-        </tr>
-      </thead>
-      <tbody class="tbody_container">
-        <script src="/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/assets/js/script.js"></script>
-      </tbody>
-    </table>
-    <div class="edit_container"></div>
-  </section>
-
-</body>
-</html>
