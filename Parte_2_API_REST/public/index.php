@@ -12,3 +12,23 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 $router = new Router();  
 $router->route($method, $uri, $data);
+
+
+/*
+    GET: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura
+    GET: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura/1 
+    POST: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura
+        Headers:
+            Content-Type: application/json
+        Body ejemplo:
+            {
+                "id_cliente": "1",
+                "id_asesor": "3",
+                "id_servicio": "2",
+                "fecha": "2026-01-27",
+                "costo": "178",
+            }
+    PUT: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura/1    
+        Lo mismo Headers y Body
+    DELETE: http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/factura/1  
+*/

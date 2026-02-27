@@ -1,6 +1,6 @@
 <?php
 
-require_once 'models/asesor.php';
+require_once __DIR__ . "/../models/Factura.php";
 
 class AsesorController {
     public function index() {
@@ -35,7 +35,6 @@ class AsesorController {
         (new Asesor())->delete($_GET['id_asesor']);
         header("Location: index.php");
     }
-
 }
 
 

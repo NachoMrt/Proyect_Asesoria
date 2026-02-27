@@ -1,6 +1,6 @@
 <?php
 
-require_once 'models/cliente.php';
+require_once __DIR__ . "/../models/Factura.php";
 
 class ClienteController {
     public function index() {
