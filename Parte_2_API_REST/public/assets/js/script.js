@@ -69,9 +69,9 @@ document.addEventListener("submit", async (e) => {
         )
         .then(res => res.json())
 
-        alert("Servicio actualizado correctamente");
         document.querySelector('.edit_container').innerHTML = "";
-        // tbody.innerHTML = "";
+        tbody.innerHTML = "";
         getAllServicios();
     }
 });
+// no actualiza data!!!!
