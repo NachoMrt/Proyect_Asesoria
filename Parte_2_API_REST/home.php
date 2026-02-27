@@ -132,6 +132,7 @@ fetch('http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/ind
 
 <!-- POST -->
 <form id="formulario">
+    <input type="number" name="id_cliente" placeholder="ID cliente" required>
   <input type="text" name="nombre" placeholder="Nombre">
   <input type="text" name="dnie" placeholder="dnie">
   <input type="text" name="email" placeholder="tu email">
