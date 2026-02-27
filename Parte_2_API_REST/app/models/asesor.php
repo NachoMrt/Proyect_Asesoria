@@ -10,19 +10,16 @@ class Asesor {
     public function getAll() {
         return $this->db->query("SELECT * FROM asesores")->fetchAll();
     }
-    public function getById($id) {
+    public function getById($id_asesor) {
         $stmt = $this->db->prepare("SELECT * FROM asesores WHERE id_asesor=?");
-        $stmt->execute([$id]);
+        $stmt->execute([$id_asesor]);
         return $stmt->fetch();
     }
     public function save($nombre,$especialidad,$email) {
         $stmt = $this->db->prepare("INSERT INTO asesores VALUES(NULL,?,?,?)");
         $stmt->execute([$nombre,$especialidad,$email]);
     }
-    // public function update($id,$nombre,$email,$clave,$edad) {
-    //     $stmt = $this->db->prepare("UPDATE asesores SET nombre=?,email=?,clave=?,edad=? WHERE id=?");
-    //     $stmt->execute([$nombre,$email,$clave,$edad,$id]);
-    // }
+   
     public function update($nombre,$especialidad,$email, $id_asesor) {
     $stmt = $this->db->prepare(
         "UPDATE asesores SET nombre=?, especialidad=?, email=? WHERE id_asesor=?"
