@@ -25,6 +25,53 @@ document.addEventListener("click", (e) => {
         const editContainer = document.querySelector('.edit_container');
         const id = e.target.dataset.id;
         fetch(`http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/servicios/${id}`)
-        .then()
+            .then(res => res.json())
+            .then(data => {
+                editContainer.innerHTML = `
+                <h3>Editar Servicio</h3>
+                <form id="editForm">
+                    <input type="hidden" id="edit_id" value="${data.id_servicio}">
+
+                    <label>Nombre:</label>
+                    <input type="text" id="edit_nombre" value="${data.nombre_servicio}" required>
+
+                    <label>Precio:</label>
+                    <input type="number" id="edit_precio" value="${data.precio}" required>
+
+                    <button type="submit">Actualizar</button>
+                </form>
+            `;
+            })
     }
 })
+
+document.addEventListener("submit", async (e) => {
+
+    if (e.target.id === "editForm") {
+        e.preventDefault();
+
+        const id = document.querySelector("#edit_id").value;
+        const nombre = document.querySelector("#edit_nombre").value;
+        const precio = document.querySelector("#edit_precio").value;
+
+        fetch(
+            `http://localhost/Certificado/Proyect_Asesoria/Parte_2_API_REST/public/index.php/servicios/${id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nombre_servicio: nombre,
+                    precio: precio
+                })
+            }
+        )
+        .then(res => res.json())
+
+        alert("Servicio actualizado correctamente");
+        document.querySelector('.edit_container').innerHTML = "";
+        // tbody.innerHTML = "";
+        getAllServicios();
+    }
+});

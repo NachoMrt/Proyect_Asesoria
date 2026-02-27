@@ -220,6 +220,7 @@
 
   <!-- Servicios -->
   <section>
+    <hr>
     <h1>Lista de todos servicios</h1>
     <table>
       <thead class="table-dark">
